@@ -3,14 +3,12 @@ import ProductData from "./ProductData.mjs";
 
 const dataSource = new ProductData("tents");
 
-function addProductToCart(product) 
-{
+function addProductToCart(product) {
   // retrieve existing cart from local storage
   let cart = getLocalStorage("so-cart") || [];
 
   // if cart is not an array, convert it to an array
-  if(!Array.isArray(cart)) 
-  {
+  if (!Array.isArray(cart)) {
     cart = [cart];
   }
 
