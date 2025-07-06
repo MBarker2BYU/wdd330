@@ -1,6 +1,7 @@
 Team members
 - Matthew D. Barker - Project Admin
 - Facundo E.  Borges
+- Jean R. Oxeant
 
 # Trello Link
 https://trello.com/b/1ZCKtxng/sleep-outside-team-7
