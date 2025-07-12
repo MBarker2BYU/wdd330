@@ -27,3 +27,14 @@ export function getParam(param) {
   const urlParams = new URLSearchParams(queryString);
   return urlParams.get(param);
 }
+
+export function renderListWithTemplate(templateFunction, parent, list, position = "afterbegin", clear=false) {
+  
+  if (clear) {
+    parent.innerHTML = "";
+  }
+
+  const htmlStrings = list.map(templateFunction);
+  
+  parent.insertAdjacentHTML(position, htmlStrings.join(""));
+}
