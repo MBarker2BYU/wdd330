@@ -1,5 +1,13 @@
+import Alert from "./Alert.mjs";  
 import ProductData from "./ProductData.mjs";
 import ProductList from "./ProductList.mjs";
+
+const alertFile = "./json/alerts.json";
+const mainElement = document.getElementsByTagName("main")[0];
+
+const alert = new Alert(mainElement, alertFile);
+
+alert.loadAlerts();
 
 const category = "tents";
 

@@ -1,0 +1,34 @@
+{
+    "alerts":[
+        {            
+            "title": "New Products Added!",
+            "description": "Check out our latest arrivals in the store.",
+            "backColor": "#28a745",
+            "foreColor": "#ffffff"
+        },
+        {
+            "title": "Limited Time Offer!",
+            "description": "Don't miss out on our exclusive sale.",
+            "backColor": "#dc3545",
+            "foreColor": "#ffffff"
+        },
+        {
+            "title": "Free Shipping on Orders Over $50!",
+            "description": "Enjoy free shipping on all orders above $50.",
+            "backColor": "#17a2b8",
+            "foreColor": "#ffffff"
+        },
+        {
+            "title": "Sign Up for Our Newsletter for Exclusive Deals!",
+            "description": "Stay updated with our latest offers and promotions.",
+            "backColor": "#ffc107",
+            "foreColor": "#000000"
+        },
+        {
+            "title": "0% financing Available!",
+            "description": "Take advantage of our 0% financing options.",
+            "backColor": "#dc3545",
+            "foreColor": "#ffffff"
+        }
+    ]
+}
