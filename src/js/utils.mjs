@@ -46,4 +46,15 @@ export async function getData(url) {
 
     return [false, error];
   }
+
+export function renderListWithTemplate(templateFunction, parent, list, position = "afterbegin", clear=false) {
+  
+  if (clear) {
+    parent.innerHTML = "";
+  }
+
+  const htmlStrings = list.map(templateFunction);
+  
+  parent.insertAdjacentHTML(position, htmlStrings.join(""));
+
 }
