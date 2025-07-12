@@ -46,6 +46,7 @@ export async function getData(url) {
 
     return [false, error];
   }
+}
 
 export function renderListWithTemplate(templateFunction, parent, list, position = "afterbegin", clear=false) {
   
