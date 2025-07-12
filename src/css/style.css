@@ -241,6 +241,36 @@ button {
   grid-column: 3;
 }
 
+/* Alert styles */
+
+.alert-list {
+  margin: 10px 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.alert-item
+{
+  padding: 10px;
+  border: var(--light-grey) solid 1px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.5) 3px 3px 4px;
+  list-style: none;
+}
+
+.alert-item h2 
+{
+  font-size: var(--large-font);
+}
+
+.alert-item p 
+{
+  font-size: var(--medium-font);
+}
+
+/* End alert styles */
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;

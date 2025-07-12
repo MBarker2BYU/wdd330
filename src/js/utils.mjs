@@ -27,3 +27,23 @@ export function getParam(param) {
   const urlParams = new URLSearchParams(queryString);
   return urlParams.get(param);
 }
+
+export async function getData(url) {
+  try 
+  {
+    const response = await fetch(url);
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch ${url}`);
+    }
+    
+    const data = await response.json();
+    
+    return [true, data];
+
+  } catch (error) {
+    console.error("There was a problem with the fetch operation:", error);
+
+    return [false, error];
+  }
+}
