@@ -1,4 +1,7 @@
 import { getLocalStorage } from "./utils.mjs";
+import { updateCartCount } from "./cartUtils.mjs";
+// This function renders the cart contents on the cart page
+// It retrieves the cart items from local storage and displays them in the HTML
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
@@ -26,3 +29,4 @@ function cartItemTemplate(item) {
 }
 
 renderCartContents();
+updateCartCount();
