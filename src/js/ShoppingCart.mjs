@@ -22,6 +22,12 @@ function cartItemTemplate(item) {
 export default class ShoppingCart {
 
     constructor(dataSource, listElement) {
+        
+        if(dataSource == null)
+          {
+            dataSource = [];
+          }
+
         this.dataSource = dataSource;
         this.listElement = listElement;
     }
