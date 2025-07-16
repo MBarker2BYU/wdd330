@@ -290,7 +290,7 @@ footer {
 }
 
 /* cart count style */
-.cart-count {
+.cart-count {  
   position: absolute;
   top: 0;
   right: 0;
