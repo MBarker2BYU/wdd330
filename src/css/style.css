@@ -250,8 +250,7 @@ button {
   gap: 5px;
 }
 
-.alert-item
-{
+.alert-item {
   padding: 10px;
   border: var(--light-grey) solid 1px;
   border-radius: 10px;
@@ -259,13 +258,11 @@ button {
   list-style: none;
 }
 
-.alert-item h2 
-{
+.alert-item h2 {
   font-size: var(--large-font);
 }
 
-.alert-item p 
-{
+.alert-item p {
   font-size: var(--medium-font);
 }
 
@@ -290,4 +287,19 @@ button {
 footer {
   font-size: var(--small-font);
   padding: 1em;
+}
+
+/* cart count style */
+.cart-count {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: var(--primary-color);
+  color: var(--dark-grey);
+  font-size: 1em;
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 0.2em 0.5em;
+  pointer-events: none;
+  z-index: 2;
 }
