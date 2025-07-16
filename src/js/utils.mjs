@@ -29,18 +29,16 @@ export function getParam(param) {
 }
 
 export async function getData(url) {
-  try 
-  {
+  try {
     const response = await fetch(url);
-    
+
     if (!response.ok) {
       throw new Error(`Failed to fetch ${url}`);
     }
-    
-    const data = await response.json();
-    
-    return [true, data];
 
+    const data = await response.json();
+
+    return [true, data];
   } catch (error) {
     console.error("There was a problem with the fetch operation:", error);
 
@@ -48,38 +46,38 @@ export async function getData(url) {
   }
 }
 
-export function renderListWithTemplate(templateFunction, parent, list, position = "afterbegin", clear=false) {
-  
+export function renderListWithTemplate(
+  templateFunction,
+  parent,
+  list,
+  position = "afterbegin",
+  clear = false,
+) {
   if (clear) {
     parent.innerHTML = "";
   }
 
   const htmlStrings = list.map(templateFunction);
-  
-  parent.insertAdjacentHTML(position, htmlStrings.join(""));
 
+  parent.insertAdjacentHTML(position, htmlStrings.join(""));
 }
 
 export function renderWithTemplate(template, parentElement, data, callback) {
-  
   parentElement.innerHTML = template;
 
-  if(callback) 
-  {
+  if (callback) {
     callback(data);
   }
 }
 
-export async function loadTemplate(path)
-{
+export async function loadTemplate(path) {
   const response = await fetch(path);
   const template = await response.text();
-  
+
   return template;
 }
 
-export async function loadHeaderAndFooter()
-{
+export async function loadHeaderAndFooter() {
   const header = await loadTemplate("/partials/header.html");
   const footer = await loadTemplate("/partials/footer.html");
 
@@ -88,4 +86,7 @@ export async function loadHeaderAndFooter()
 
   renderWithTemplate(header, headerElement);
   renderWithTemplate(footer, footerElement);
+
+  //Returning a promise to ensure the header and footer are loaded before proceeding
+  return Promise.resolve();
 }

@@ -11,4 +11,6 @@ const dataSource = new ProductData(tents);
 const productDetails = new ProductDetails(productId, dataSource);
 
 productDetails.init();
+
+
 updateCartCount();
