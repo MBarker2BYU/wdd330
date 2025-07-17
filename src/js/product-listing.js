@@ -9,7 +9,7 @@ loadHeaderAndFooter();
 
 const category = getParam("category");
 const productId = getParam("product");
-const alertFile = "./json/alerts.json";
+const alertFile = "/json/alerts.json";
 
 const mainElement = document.getElementsByTagName("main")[0];
 
