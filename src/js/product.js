@@ -4,10 +4,9 @@ import ProductDetails from "./ProductDetails.mjs";
 import { updateCartCount } from "./cartUtils.mjs";
 
 const product = "product";
-const tents = "tents";
 
 const productId = getParam(product);
-const dataSource = new ProductData(tents);
+const dataSource = new ProductData();
 const productDetails = new ProductDetails(productId, dataSource);
 
 productDetails.init();

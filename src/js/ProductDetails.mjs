@@ -11,6 +11,7 @@ export default class ProductDetails {
   async init() {
     try {
       this.product = await this.dataSource.findProductById(this.productId);
+      console.log("API Product Response:", this.product);
 
       if (!this.product) {
         throw new Error("Product not found");
@@ -72,8 +73,8 @@ export default class ProductDetails {
         <h2 class="divider">${this.product.NameWithoutBrand}</h2>
         <img
           class="divider"
-          src="${this.product.Image}"
-          alt="${this.product.NameWithoutBrand}"
+          src="${this.product.Images.PrimaryLarge}"
+          alt="${this.product.Images.NameWithoutBrand}"
         />
         <p class="product-card__price">$${this.product.ListPrice}</p>
         <p class="product__color">${this.product.Colors[0].ColorName}</p>
