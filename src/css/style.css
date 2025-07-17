@@ -1,3 +1,35 @@
+/* Category list styles */
+.category-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0;
+}
+
+.category-card {
+  flex: 1 1 200px;
+  max-width: 220px;
+  min-width: 180px;
+  box-sizing: border-box;
+  margin: 0.5em 0;
+  padding: 1em;
+  background: #fff;
+  border: 1px solid var(--light-grey);
+  border-radius: 8px;
+  text-align: center;
+  transition: box-shadow 0.2s;
+}
+
+.category-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.category-card img {
+  max-width: 100px;
+  margin-bottom: 0.5em;
+}
 :root {
   --font-body: Arial, Helvetica, sans-serif;
   --font-headline: Haettenschweiler, "Arial Narrow Bold", sans-serif;
@@ -290,7 +322,7 @@ footer {
 }
 
 /* cart count style */
-.cart-count {  
+.cart-count {
   position: absolute;
   top: 0;
   right: 0;
