@@ -3,16 +3,29 @@ import { getLocalStorage, loadHeaderAndFooter } from "./utils.mjs";
 import ShoppingCart from "./ShoppingCart.mjs";
 import { updateCartCount } from "./cartUtils.mjs";
 
-// This function renders the cart contents on the cart page
-// It retrieves the cart items from local storage and displays them in the HTML
-
-loadHeaderAndFooter();
-
 const cartItems = getLocalStorage("so-cart");
+const listElement = document.querySelector(".product-list");
 
-const cartListElement = document.querySelector(".product-list");
-const shoppingCart = new ShoppingCart(cartItems, cartListElement);
+async function initialize() 
+{
+  try {
 
-shoppingCart.init();
+    await loadHeaderAndFooter();
 
-updateCartCount();
+    updateCartCount();
+
+    if (!listElement) {
+      throw new Error("Element with class 'product-list' not found in HTML!");
+    }
+
+    const shoppingCart = new ShoppingCart(cartItems, listElement);
+    shoppingCart.init();
+
+  } catch (error) {
+    // Handle any errors that occur during initialization
+    //To be replaced with a user-friendly message    
+    console.error("Error rendering cart items:", error);
+  }
+}
+
+initialize();
