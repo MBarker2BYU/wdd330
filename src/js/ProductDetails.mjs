@@ -44,12 +44,22 @@ export default class ProductDetails {
         cart = [cart].filter((item) => item); //Remove any null values.
       }
 
-      cart.push(this.product);
+      // Check if product is already in cart
+      const existingItem = cart.find((item) => item.Id === this.product.Id);
+      if (existingItem) {
+        // If quantity property doesn't exist, initialize it
+        if (!existingItem.quantity) {
+          existingItem.quantity = 1;
+        }
+        existingItem.quantity += 1;
+      } else {
+        // Add new product with quantity 1
+        const productToAdd = { ...this.product, quantity: 1 };
+        cart.push(productToAdd);
+      }
 
       setLocalStorage("so-cart", cart);
-
       updateCartCount(); // Update the cart count in the UI
-
       console.log("Cart updated:", cart);
     } catch (error) {
       console.error("Error adding to cart:", error);
