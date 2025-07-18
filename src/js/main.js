@@ -32,9 +32,12 @@ async function initialize() {
       );
     }
 
-    const productList = new ProductList(category, productData, listElement);
-
-    productList.init();
+    // Only render products if .product-list is present
+    if (document.querySelector(".product-list")) {
+      const productList = new ProductList(category, productData, listElement);
+      productList.init();
+    }
+    // If .category-list is present, do not render products
 
     alert.loadAlerts();
   } catch (error) {

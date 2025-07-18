@@ -44,7 +44,6 @@ async function initialize() {
       const productList = new ProductList(category, productData, listElement);
       await productList.init();
     }
-    alert.loadAlerts();
   } catch (error) {
     // Handle any errors that occur during initialization
     //To be replaced with a user-friendly message
