@@ -1,9 +1,13 @@
+const baseURL = import.meta.env.VITE_SERVER_URL;
 import { renderListWithTemplate } from "./utils.mjs";
 
 function productCardTemplate(product) {
+
+  const imagePath = product.Image?.PrimaryMedium?`${baseURL}${product.Image.PrimaryMedium}`:"/images/placeholder.jpg";
+
   return `<li class="product-card">
     <a href="product_pages/?product=${product.Id}">
-      <img src="${product.Image}" alt="Image of ${product.Name}">
+      <img src="${imagePath}" alt="Image of ${product.Name}">
       <h2>${product.Brand.Name}</h2>
       <h3>${product.Name}</h3>
       <p class="product-card__price">$${product.FinalPrice}</p>
@@ -24,10 +28,10 @@ export default class ProductList {
     async init() {
         try {
         
-            this.products = await this.dataSource.getData();
+            const list = await this.dataSource.getData(this.category);
 
             //Filter out products without details
-            let filteredProducts = this.products.filter(product => !this.excludedIds.includes(product.Id));
+            let filteredProducts = list.filter(product => !this.excludedIds.includes(product.Id));
 
             //Clear the list element before rendering
             this.listElement.innerHTML = "";

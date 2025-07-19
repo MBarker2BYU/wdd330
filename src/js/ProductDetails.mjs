@@ -64,6 +64,8 @@ export default class ProductDetails {
       mainElement.innerHTML = "<p>Product details are not available</p>";
       return;
     }
+    console.log("Image:", this.product.Image);
+
 
     // Generate HTML for product details using product data
     mainElement.innerHTML = `
