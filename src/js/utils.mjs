@@ -21,3 +21,11 @@ export function setClick(selector, callback) {
   });
   qs(selector).addEventListener("click", callback);
 }
+
+export function renderListWithTemplate(template, parentElement, list, position = "afterbegin", clear = false){
+  const htmlStrings = list.map(template);
+  if (clear) {
+    parentElement.inneHTML = "";
+  }
+  parentElement.innerAdjacentHTML(position, htmlStrings.join(""));
+}
