@@ -22,7 +22,7 @@ async function initialize()
     shoppingCart.init();
 
     // Show cart total if cart is not empty
-    const cartFooter = document.querySelector('.cart-footer');
+    const cartFooter = document.querySelector(".cart-footer");
     if (cartItems && cartItems.length > 0) {
       // Calculate total
       const total = cartItems.reduce((sum, item) => {
@@ -30,10 +30,10 @@ async function initialize()
         const price = item.ListPrice ? item.ListPrice : item.FinalPrice;
         return sum + price * quantity;
       }, 0);
-      cartFooter.classList.remove('hide');
-      cartFooter.querySelector('.cart-total').textContent = `Total: $${total.toFixed(2)}`;
+      cartFooter.classList.remove("hide");
+      cartFooter.querySelector(".cart-total").textContent = `Total: $${total.toFixed(2)}`;
     } else {
-      cartFooter.classList.add('hide');
+      cartFooter.classList.add("hide");
     }
 
   } catch (error) {
