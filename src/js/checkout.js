@@ -1,6 +1,7 @@
 import { loadHeaderAndFooter } from "./utils.mjs";
 import { updateCartCount } from "./cartUtils.mjs";
-import CheckoutProcess from "./CheckoutProcess.js"; // Ajusta la ruta si es necesario
+import CheckoutProcess from "./CheckoutProcess.js";
+import ExternalServices from "./ExternalServices.js"; // Ajusta la ruta si es necesario
 
 async function initialize() {
   await loadHeaderAndFooter();
@@ -19,6 +20,15 @@ async function initialize() {
   if (zipInput) {
     zipInput.addEventListener("change", (e) => {
       checkout.calculateAndDisplayTotals(e.target.value);
+    });
+  }
+
+  const form = document.getElementById("checkout-form");
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const result = await checkout.checkout(form);
+      console.log(result);
     });
   }
 }

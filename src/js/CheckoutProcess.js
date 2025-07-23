@@ -39,4 +39,33 @@ export default class CheckoutProcess {
       <p><strong>Total: $${this.total.toFixed(2)}</strong></p>
     `;
   }
+
+  packageItems(items) {
+    // Transform items to the required format
+    return items.map((item) => ({
+      id: item.Id || item.id,
+      name: item.Name || item.name,
+      price: item.ListPrice ? item.ListPrice : item.FinalPrice,
+      quantity: item.quantity || 1,
+    }));
+  }
+
+  async checkout(form) {
+    // convert the form into an object
+    const formData = new FormData(form);
+    const order = {};
+    formData.forEach((value, key) => {
+      order[key] = value;
+    });
+    // Add extra data
+    order.orderDate = new Date().toISOString();
+    order.items = this.packageItems(this.cart);
+    order.orderTotal = this.total.toFixed(2);
+    order.shipping = this.shipping;
+    order.tax = this.tax.toFixed(2);
+
+    // call ExternalServices.checkout
+    const response = await ExternalServices.checkout(order);
+    return response;
+  }
 }
