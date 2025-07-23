@@ -1,3 +1,14 @@
+/* Cart footer styles */
+.cart-footer {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: #f5f5f5;
+  border-top: 2px solid #eee;
+  text-align: right;
+}
+.cart-footer.hide {
+  display: none;
+}
 /* Category list styles */
 .category-list {
   display: flex;
