@@ -64,22 +64,46 @@
           <fieldset>
             <legend>Customer Information</legend>
             <label for="firstName">First Name:</label>
-            <input type="text" id="firstName" name="firstName" required />
+            <input
+              type="text"
+              id="firstName"
+              name="fname"
+              required
+              value="Facundo"
+            />
 
             <label for="lastName">Last Name:</label>
-            <input type="text" id="lastName" name="lastName" required />
+            <input
+              type="text"
+              id="lastName"
+              name="lname"
+              required
+              value="Borges"
+            />
           </fieldset>
 
           <fieldset>
             <legend>Address</legend>
             <label for="street">Street Address:</label>
-            <input type="text" id="street" name="street" required />
+            <input
+              type="text"
+              id="street"
+              name="street"
+              required
+              value="Calle Falsa 123"
+            />
 
             <label for="city">City:</label>
-            <input type="text" id="city" name="city" required />
+            <input type="text" id="city" name="city" required value="Ciudad" />
 
             <label for="state">State:</label>
-            <input type="text" id="state" name="state" required />
+            <input
+              type="text"
+              id="state"
+              name="state"
+              required
+              value="Estado"
+            />
 
             <label for="zip">Zip Code:</label>
             <input
@@ -88,6 +112,7 @@
               name="zip"
               required
               inputmode="numeric"
+              value="12345"
             />
           </fieldset>
 
@@ -102,10 +127,19 @@
               maxlength="16"
               pattern="\d{16}"
               inputmode="numeric"
+              value="1234123412341234"
             />
 
             <label for="expDate">Expiration Date:</label>
-            <input type="month" id="expDate" name="expDate" required />
+            <input
+              type="text"
+              id="expDate"
+              name="expiration"
+              required
+              value="12/27"
+              placeholder="MM/YY"
+              pattern="\d{2}/\d{2,4}"
+            />
 
             <label for="securityCode">Security Code:</label>
             <input
@@ -115,6 +149,7 @@
               required
               maxlength="4"
               pattern="\d{3,4}"
+              value="123"
             />
           </fieldset>
 

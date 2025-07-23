@@ -1,3 +1,5 @@
+import ExternalServices from "./ExternalServices.mjs";
+
 export default class CheckoutProcess {
   constructor(cart, summaryDiv) {
     this.cart = cart;

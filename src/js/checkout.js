@@ -1,7 +1,6 @@
 import { loadHeaderAndFooter } from "./utils.mjs";
 import { updateCartCount } from "./cartUtils.mjs";
 import CheckoutProcess from "./CheckoutProcess.js";
-import ExternalServices from "./ExternalServices.js"; // Ajusta la ruta si es necesario
 
 async function initialize() {
   await loadHeaderAndFooter();
