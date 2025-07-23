@@ -1,4 +1,4 @@
-import Alert from "./Alert.mjs";
+//import Alert from "./Alert.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 import ProductList from "./ProductList.mjs";
 import ProductDetails from "./ProductDetails.mjs";
@@ -9,11 +9,11 @@ loadHeaderAndFooter();
 
 const category = getParam("category");
 const productId = getParam("product");
-const alertFile = "/json/alerts.json";
+//const alertFile = "/json/alerts.json";
 
-const mainElement = document.getElementsByTagName("main")[0];
+//const mainElement = document.getElementsByTagName("main")[0];
 
-const alert = new Alert(mainElement, alertFile);
+//const alert = new Alert(mainElement, alertFile);
 const productData = new ExternalServices();
 
 const listElement = document.querySelector(".product-list");
