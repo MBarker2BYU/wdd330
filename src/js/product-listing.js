@@ -1,5 +1,5 @@
 import Alert from "./Alert.mjs";
-import ProductData from "./ProductData.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 import ProductList from "./ProductList.mjs";
 import ProductDetails from "./ProductDetails.mjs";
 import { updateCartCount } from "./cartUtils.mjs";
@@ -14,7 +14,7 @@ const alertFile = "/json/alerts.json";
 const mainElement = document.getElementsByTagName("main")[0];
 
 const alert = new Alert(mainElement, alertFile);
-const productData = new ProductData();
+const productData = new ExternalServices();
 
 const listElement = document.querySelector(".product-list");
 
