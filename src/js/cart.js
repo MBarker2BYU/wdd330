@@ -4,7 +4,7 @@ import ShoppingCart from "./ShoppingCart.mjs";
 import { updateCartCount } from "./cartUtils.mjs";
 
 const cartItems = getLocalStorage("so-cart");
-const listElement = document.querySelector(".product-list");
+const listElement = document.querySelector(".shopping-cart");
 
 async function initialize() 
 {
@@ -15,7 +15,7 @@ async function initialize()
     updateCartCount();
 
     if (!listElement) {
-      throw new Error("Element with class 'product-list' not found in HTML!");
+      throw new Error("Element with class 'shopping-cart' not found in HTML!");
     }
 
     const shoppingCart = new ShoppingCart(cartItems, listElement);
