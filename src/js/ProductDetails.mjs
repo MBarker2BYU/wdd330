@@ -46,23 +46,38 @@ export default class ProductDetails {
 
       // Check if product is already in cart
       const existingItem = cart.find((item) => item.Id === this.product.Id);
+
       if (existingItem) {
-        // If quantity property doesn't exist, initialize it
-        if (!existingItem.quantity) {
-          existingItem.quantity = 1;
-        }
-        existingItem.quantity += 1;
+        
+        // Increment quantity if item exists
+        existingItem.quantity = (existingItem.quantity || 1) + 1;
+
       } else {
+        
         // Add new product with quantity 1
         const productToAdd = { ...this.product, quantity: 1 };
+        
         cart.push(productToAdd);
       }
 
       setLocalStorage("so-cart", cart);
+
       updateCartCount(); // Update the cart count in the UI
+      
+      // Trigger cart re-render if ShoppingCart instance exists
+      const listElement = document.querySelector(".shopping-cart");
+      
+      if (listElement) {
+        const shoppingCart = new ShoppingCart(cart, listElement);
+        shoppingCart.renderCart();
+      }
+
       console.log("Cart updated:", cart);
+
     } catch (error) {
+
       console.error("Error adding to cart:", error);
+
     }
   }
 

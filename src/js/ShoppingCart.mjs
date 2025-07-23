@@ -1,4 +1,5 @@
-import { renderListWithTemplate } from "./utils.mjs";
+import { setLocalStorage } from "./utils.mjs";
+import { updateCartCount } from "./cartUtils.mjs";
 
 function cartItemTemplate(item) {
   const quantity = item.quantity || 1;
@@ -45,20 +46,121 @@ export default class ShoppingCart {
   }
 
   async init() {
-    try {
-      const cartItems = await this.dataSource;
 
-      //Clear the list element before rendering
-      this.listElement.innerHTML = "";
-
-      this.renderCartContents(cartItems);
-    } catch (error) {
-      console.error("Error initializing shopping cart:", error);
-      this.listElement.innerHTML = "<p>Error loading cart items</p>";
-    }
+    this.renderCart();
+    this.attachEventListeners();
   }
 
-  renderCartContents(cartItems) {
-    renderListWithTemplate(cartItemTemplate, this.listElement, cartItems);
+  renderCart()
+  {
+    this.listElement.innerHTML = ""; // Clear the list element
+    
+    if (this.dataSource.length === 0) {
+      this.listElement.innerHTML = "<p>Your cart is empty.</p>";
+      return;
+    }
+
+    this.dataSource.forEach((item, index) => {
+
+      const itemCard = cartItemTemplate(item, item.quantity || 1); // Assuming cartItemTemplate is your function that returns the itemCard HTML
+      
+      this.listElement.insertAdjacentHTML("beforeend", itemCard);
+
+    });
+
+    this.updateCartTotal();
+  }
+
+  attachEventListeners() {
+    this.listElement.addEventListener("click", (e) => {
+      const target = e.target.closest("button");
+      
+      if (!target) return;
+
+      let quantityControl = target.closest(".quantity-control");
+      let itemId = quantityControl?.dataset.id;
+
+      // If delete-button is clicked, find the nearest quantity-control sibling
+      if (target.classList.contains("delete-button")) {
+
+        quantityControl = target.closest(".quantity-controls")?.querySelector(".quantity-control");
+
+        itemId = quantityControl?.dataset.id;
+
+      }
+
+      if (!itemId) return;
+
+      if (target.classList.contains("quantity-add")) {
+
+        this.updateQuantity(itemId, 1);
+
+      } else if (target.classList.contains("quantity-remove")) {
+
+        this.updateQuantity(itemId, -1);
+
+      } else if (target.classList.contains("delete-button")) {
+
+        this.removeItemFromCart(itemId);
+
+      }
+    });
+  }
+
+  updateQuantity(itemId, change) {
+    // Ensure dataSource is an array before proceeding
+    if (!Array.isArray(this.dataSource)) {
+      this.dataSource = [];
+      console.warn("dataSource is not an array, resetting to empty array.");
+    }
+
+    const itemIndex = this.dataSource.findIndex((item) => item.Id === itemId);
+    
+    if (itemIndex === -1) return;
+
+    let newQuantity = (this.dataSource[itemIndex].quantity || 1) + change;
+
+    if (newQuantity <= 0) {
+      this.dataSource.splice(itemIndex, 1);
+    } else {
+      this.dataSource[itemIndex].quantity = newQuantity;
+    }
+
+    setLocalStorage("so-cart", this.dataSource);
+
+    updateCartCount();
+
+    this.renderCart();
+  }
+
+  removeItemFromCart(itemId) {
+    // Find the index of the item to remove
+    const itemIndex = this.dataSource.findIndex((item) => item.Id === itemId);
+
+    if (itemIndex === -1) return;
+
+    // Remove the item from the cart
+    this.dataSource.splice(itemIndex, 1);
+
+    // Update localStorage
+    setLocalStorage("so-cart", this.dataSource);
+
+    // Update cart count in header
+    updateCartCount();
+
+    // Re-render cart
+    this.renderCart();
+  }
+
+  updateCartTotal() {
+    const total = this.dataSource.reduce((sum, item) => {
+      const quantity = item.quantity || 1;
+      return sum + item.FinalPrice * quantity;
+    }, 0);
+
+    const totalElement = document.querySelector(".cart-total");
+    if (totalElement) {
+      totalElement.textContent = `Total: $${total.toFixed(2)}`;
+    }
   }
 }
