@@ -53,21 +53,21 @@ export default class CheckoutProcess {
   }
 
   async checkout(form) {
-    // convert the form into an object
+    // Convert the form into an object
     const formData = new FormData(form);
     const order = {};
     formData.forEach((value, key) => {
       order[key] = value;
     });
+
     // Add extra data
     order.orderDate = new Date().toISOString();
     order.items = this.packageItems(this.cart);
     order.orderTotal = this.total.toFixed(2);
-    order.shipping = this.shipping;
+    order.shipping = this.shipping.toFixed(2);
     order.tax = this.tax.toFixed(2);
 
-    // call ExternalServices.checkout
-    const response = await ExternalServices.checkout(order);
-    return response;
+    // Submit to server
+    return await ExternalServices.checkout(order);
   }
 }

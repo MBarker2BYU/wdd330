@@ -1,4 +1,4 @@
-import { setLocalStorage } from "./utils.mjs";
+import { setLocalStorage, alertMessage } from "./utils.mjs";
 import { updateCartCount } from "./cartUtils.mjs";
 
 export default class ProductDetails {
@@ -41,43 +41,39 @@ export default class ProductDetails {
       let cart = JSON.parse(localStorage.getItem("so-cart")) || [];
 
       if (!Array.isArray(cart)) {
-        cart = [cart].filter((item) => item); //Remove any null values.
+        cart = [cart].filter((item) => item); // Remove any null values
       }
 
       // Check if product is already in cart
       const existingItem = cart.find((item) => item.Id === this.product.Id);
 
       if (existingItem) {
-        
         // Increment quantity if item exists
         existingItem.quantity = (existingItem.quantity || 1) + 1;
-
       } else {
-        
         // Add new product with quantity 1
         const productToAdd = { ...this.product, quantity: 1 };
-        
         cart.push(productToAdd);
       }
 
       setLocalStorage("so-cart", cart);
 
       updateCartCount(); // Update the cart count in the UI
-      
+
       // Trigger cart re-render if ShoppingCart instance exists
       const listElement = document.querySelector(".shopping-cart");
-      
       if (listElement) {
         const shoppingCart = new ShoppingCart(cart, listElement);
         shoppingCart.renderCart();
       }
 
+      // Display success message
+      alertMessage(`${this.product.NameWithoutBrand} added to cart!`, false, true); // Use success styling
+
       console.log("Cart updated:", cart);
-
     } catch (error) {
-
       console.error("Error adding to cart:", error);
-
+      alertMessage("Failed to add item to cart. Please try again.", false);
     }
   }
 
