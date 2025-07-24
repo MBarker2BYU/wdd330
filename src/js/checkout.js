@@ -26,6 +26,11 @@ async function initialize() {
   if (form) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      // manual form validation
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
       const result = await checkout.checkout(form);
       console.log(result);
     });
