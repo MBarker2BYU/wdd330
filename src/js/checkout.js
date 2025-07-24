@@ -33,6 +33,12 @@ async function initialize() {
       }
       const result = await checkout.checkout(form);
       console.log(result);
+      // Happy path: clear cart and redirect to success page
+      if (result.orderId && result.message === "Order Placed") {
+        localStorage.removeItem("so-cart");
+        window.location.href = "success.html";
+        return;
+      }
     });
   }
 }
