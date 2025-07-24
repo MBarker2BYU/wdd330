@@ -1,5 +1,5 @@
 import Alert from "./Alert.mjs";
-import ProductData from "./ProductData.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 import ProductList from "./ProductList.mjs";
 import { updateCartCount } from "./cartUtils.mjs";
 import { loadHeaderAndFooter } from "./utils.mjs";
@@ -12,7 +12,7 @@ const alertFile = "./json/alerts.json";
 const mainElement = document.getElementsByTagName("main")[0];
 
 const alert = new Alert(mainElement, alertFile);
-const productData = new ProductData(category);
+const productData = new ExternalServices(category);
 
 // Try to find either .product-list or .category-list
 let listElement = document.querySelector(".product-list");

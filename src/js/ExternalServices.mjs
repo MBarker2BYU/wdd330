@@ -8,7 +8,7 @@ function convertToJson(res) {
   }
 }
 
-export default class ProductData {
+export default class ExternalServices {
   // No need for category or path in constructor
   constructor() {}
 
@@ -23,5 +23,17 @@ export default class ProductData {
     const response = await fetch(`${baseURL}product/${id}`);
     const data = await convertToJson(response);
     return data.Result;
+  }
+
+  // Static method to handle checkout
+  static async checkout(order) {
+    const url = "https://wdd330-backend.onrender.com/checkout";
+    const options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(order),
+    };
+    const response = await fetch(url, options);
+    return response.json();
   }
 }

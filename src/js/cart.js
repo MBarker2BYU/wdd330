@@ -1,4 +1,3 @@
-
 import { getLocalStorage, loadHeaderAndFooter } from "./utils.mjs";
 import ShoppingCart from "./ShoppingCart.mjs";
 import { updateCartCount } from "./cartUtils.mjs";
@@ -6,10 +5,8 @@ import { updateCartCount } from "./cartUtils.mjs";
 const cartItems = getLocalStorage("so-cart");
 const listElement = document.querySelector(".shopping-cart");
 
-async function initialize() 
-{
+async function initialize() {
   try {
-
     await loadHeaderAndFooter();
 
     updateCartCount();
@@ -31,14 +28,15 @@ async function initialize()
         return sum + price * quantity;
       }, 0);
       cartFooter.classList.remove("hide");
+
       cartFooter.querySelector(".cart-total").textContent = `Total: $${total.toFixed(2)}`;
+
     } else {
       cartFooter.classList.add("hide");
     }
-
   } catch (error) {
     // Handle any errors that occur during initialization
-    //To be replaced with a user-friendly message    
+    //To be replaced with a user-friendly message
     console.error("Error rendering cart items:", error);
   }
 }
