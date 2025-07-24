@@ -1,6 +1,7 @@
 import { loadHeaderAndFooter } from "./utils.mjs";
 import { updateCartCount } from "./cartUtils.mjs";
 import CheckoutProcess from "./CheckoutProcess.js";
+import { alertMessage } from "./utils.mjs";
 
 async function initialize() {
   await loadHeaderAndFooter();
@@ -38,6 +39,16 @@ async function initialize() {
         localStorage.removeItem("so-cart");
         window.location.href = "success.html";
         return;
+      }
+      // Unhappy path: show backend errors as popup alerts
+      if (result.error && result.details) {
+        if (typeof result.details === "object") {
+          for (const key in result.details) {
+            alertMessage(result.details[key]);
+          }
+        } else {
+          alertMessage(result.details);
+        }
       }
     });
   }
