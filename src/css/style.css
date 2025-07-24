@@ -251,7 +251,7 @@ button {
 
 /* End New Cart Card */
 
-/* Alert styles */
+/* Alert List styles */
 
 .alert-list {
   margin: 10px 5px;
@@ -432,10 +432,61 @@ button {
     z-index: 2;
   }
 
+  /* Success message styles */
+  .success {
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+
+  .btn:hover {
+    background-color: #0056b3;
+  }
+
   footer {
     font-size: var(--small-font);
     padding: 1em;
   } 
+
+  /* Alert Message Styles */
+
+  .alert {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 1rem;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .alert .close {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #721c24;
+  }
+
+  .success-alert {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+  }
+
+  .success-alert .close {
+    color: #155724;
+  }
 
 @media screen and (min-width: 600px) {
   body {

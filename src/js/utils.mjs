@@ -40,30 +40,22 @@ export async function getData(url) {
     const data = await response.json();
     
     return [true, data];
-
   } catch (error) {
     console.error("There was a problem with the fetch operation:", error);
-
     return [false, error];
   }
 }
 
 export function renderListWithTemplate(templateFunction, parent, list, position = "afterbegin", clear=false) {
-  
   if (clear) {
     parent.innerHTML = "";
   }
-
   const htmlStrings = list.map(templateFunction);
-  
   parent.insertAdjacentHTML(position, htmlStrings.join(""));
-
 }
 
 export function renderWithTemplate(template, parentElement, data, callback) {
-  
   parentElement.innerHTML = template;
-
   if(callback) 
   {
     callback(data);
@@ -74,7 +66,6 @@ export async function loadTemplate(path)
 {
   const response = await fetch(path);
   const template = await response.text();
-  
   return template;
 }
 
@@ -82,10 +73,33 @@ export async function loadHeaderAndFooter()
 {
   const header = await loadTemplate("/partials/header.html");
   const footer = await loadTemplate("/partials/footer.html");
-
   const headerElement = document.getElementById("main-header");
   const footerElement = document.getElementById("main-footer");
-
   renderWithTemplate(header, headerElement);
   renderWithTemplate(footer, footerElement);
+}
+
+export function alertMessage(message, scroll = true, isSuccess = false) {
+  // Remove existing alerts to avoid stacking
+  const existingAlerts = document.querySelectorAll(".alert, .success-alert");
+  existingAlerts.forEach((alert) => alert.remove());
+
+  // Create new alert
+  const alert = document.createElement("div");
+  alert.className = isSuccess ? "success-alert" : "alert";
+  alert.innerHTML = `<span>${message}</span><button class="close">×</button>`;
+
+  // Insert at the top of main
+  const main = document.querySelector("main");
+  main.insertBefore(alert, main.firstChild);
+
+  // Scroll to top if specified
+  if (scroll) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  // Add close button functionality
+  alert.querySelector(".close").addEventListener("click", () => {
+    alert.remove();
+  });
 }
