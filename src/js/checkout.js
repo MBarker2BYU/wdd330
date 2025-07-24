@@ -41,6 +41,7 @@ async function initialize() {
         return;
       }
       // Unhappy path: show backend errors as popup alerts
+      // Show any error properties as popup alerts
       if (result.error && result.details) {
         if (typeof result.details === "object") {
           for (const key in result.details) {
@@ -48,6 +49,10 @@ async function initialize() {
           }
         } else {
           alertMessage(result.details);
+        }
+      } else if (typeof result === "object" && !result.orderId) {
+        for (const key in result) {
+          alertMessage(result[key]);
         }
       }
     });
