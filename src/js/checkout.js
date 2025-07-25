@@ -26,8 +26,27 @@ async function initialize() {
   if (form) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const result = await checkout.checkout(form);
-      console.log(result);
+      if (form.checkValidity()) {
+        try {
+          await checkout.checkout(form);
+          localStorage.removeItem("so-cart");
+          window.location.href = "/checkout/success.html";
+        } catch (error) {
+          if (error.name === "serviceError") {
+            const sms = Array.isArray(error.message)
+              ? error.message.join(", ")
+              : error.message;
+            sms.forEach((msg) => alert(msg, true));
+          } else {
+            alert(
+              "An unexpected error occurred. Please try again later.",
+              true,
+            );
+          }
+        }
+      } else {
+        form.reportValidity();
+      }
     });
   }
 }

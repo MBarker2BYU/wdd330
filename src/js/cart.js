@@ -29,8 +29,8 @@ async function initialize() {
       }, 0);
       cartFooter.classList.remove("hide");
 
-      cartFooter.querySelector(".cart-total").textContent = `Total: $${total.toFixed(2)}`;
-
+      cartFooter.querySelector(".cart-total").textContent =
+        `Total: $${total.toFixed(2)}`;
     } else {
       cartFooter.classList.add("hide");
     }

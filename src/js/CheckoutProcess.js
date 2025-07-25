@@ -67,7 +67,16 @@ export default class CheckoutProcess {
     order.tax = this.tax.toFixed(2);
 
     // call ExternalServices.checkout
-    const response = await ExternalServices.checkout(order);
-    return response;
+    try {
+      const response = await ExternalServices.checkout(order);
+      return response;
+    } catch (err) {
+      if (err.name === "serviceError") {
+        this.displayMessage(`Checkout failed: ${err.message}`);
+      } else {
+        this.displayMessage("An unexpected error occurred during checkout.");
+        console.error("Checkout error:", err);
+      }
+    }
   }
 }

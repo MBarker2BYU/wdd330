@@ -4,7 +4,7 @@ import ProductList from "./ProductList.mjs";
 import ProductDetails from "./ProductDetails.mjs";
 import { updateCartCount } from "./cartUtils.mjs";
 import { loadHeaderAndFooter, getParam } from "./utils.mjs";
-
+import { alertMessage } from "./utils.mjs";
 loadHeaderAndFooter();
 
 const category = getParam("category");
